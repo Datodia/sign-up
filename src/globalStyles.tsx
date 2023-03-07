@@ -17,6 +17,10 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Poppins';
     }
+    body{
+        background-image: url('assets/mobile.png');
+        background-color: var(--red)
+    }
 
     h1 {
     font-weight: 700;
