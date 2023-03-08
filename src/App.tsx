@@ -16,10 +16,7 @@ const Container = styled.div`
   width: 327px;
   height: 100vh;
   margin: 0 auto;
+  margin-bottom: 300px;
 `
 
-const Box = styled.div`
-  width: 200px;
-  height: 200px;
-  background-color: var(--red);
-`
+
