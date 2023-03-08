@@ -16,7 +16,7 @@ export const Texts = () => {
 const Container = styled.div`
     width: 100%;
     margin-top: 88px;
-    padding: 16px;
+    padding: 16px 0;
 `
 const Title = styled.h1`
     font-size: 28px;
