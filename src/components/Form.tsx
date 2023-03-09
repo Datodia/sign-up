@@ -2,6 +2,9 @@ import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from 'styled-components'
+import Test from './Test';
+import { useEffect, useState } from 'react';
+
 
 interface Data {
     firstName: string;
@@ -11,10 +14,12 @@ interface Data {
 }
 
 export const Form = () => {
+    const [show, setShow] = useState<boolean>(false)
+    const [showThank, setShowThank] = useState<boolean>(false)
 
     const schema = Yup.object().shape({
-        firstName: Yup.string().required('First Name cannot be empty'),
-        lastName: Yup.string().required('Last Name cannot be empty'),
+        firstName: Yup.string().required('First Name cannot be empty').matches(/^[a-zA-Z]+$/, 'Name Should be only letters'),
+        lastName: Yup.string().required('Last Name cannot be empty').matches(/^[a-zA-Z]+$/, 'Last Name Should be only letters'),
         email: Yup.string().email('Looks like this is not an email').required('Email cannot be a empty'),
         password: Yup.string().required('Password cannot be an empty').min(3, "min characters are 4 characters").max(20, "max caracters are 20")
     })
@@ -28,54 +33,69 @@ export const Form = () => {
 
 
     const onSubmit = (data: Data) => {
-        console.log(data)
+        if (data) {
+            setShow(true)
+            setShowThank(true)
+            setTimeout(() => {
+                setShow(false);
+            }, 5000);
+        } else {
+            setShow(false)
+
+        }
     }
 
+
+
     return (
-        <FormDiv onSubmit={handleSubmit(onSubmit)} >
-            <Input
-                style={{
-                    border: errors?.firstName?.message && '2px solid var(--red)',
-                    backgroundImage: errors?.firstName?.message && 'url(assets/error.png)'
-                }}
-                type={'text'}
-                placeholder="First Name"
-                {...register("firstName")}
-            />
-            <Error>{errors?.firstName?.message}</Error>
-            <Input
-                style={{
-                    border: errors?.lastName?.message && '2px solid var(--red)',
-                    backgroundImage: errors?.lastName?.message && 'url(assets/error.png)'
-                }}
-                type={'text'}
-                placeholder="Last Name"
-                {...register('lastName')}
-            />
-            <Error>{errors.lastName?.message}</Error>
-            <Input
-                style={{
-                    border: errors?.email?.message && '2px solid var(--red)',
-                    backgroundImage: errors?.email?.message && 'url(assets/error.png)'
-                }}
-                type="email"
-                placeholder='Email'
-                {...register('email')}
-            />
-            <Error>{errors?.email?.message}</Error>
-            <Input
-                style={{
-                    border: errors?.password?.message && '2px solid var(--red)',
-                    backgroundImage: errors?.password?.message && 'url(assets/error.png)'
-                }}
-                type="password"
-                placeholder='Password'
-                {...register('password')}
-            />
-            <Error>{errors?.password?.message}</Error>
-            <Submit type="submit" value='CLAIM YOUR FREE TRIAL' />
-            <Terms>By clicking the button, you are agreeing to our <span style={{ color: 'var(--red)', fontWeight: '700' }}>Terms and Services</span></Terms>
-        </FormDiv>
+        <>
+            {!showThank ? <FormDiv onSubmit={handleSubmit(onSubmit)} >
+                <Input
+                    style={{
+                        border: errors?.firstName?.message && '2px solid var(--red)',
+                        backgroundImage: errors?.firstName?.message && 'url(assets/error.png)'
+                    }}
+                    type={'text'}
+                    placeholder="First Name"
+                    {...register("firstName")}
+                />
+                <Error>{errors?.firstName?.message}</Error>
+                <Input
+                    style={{
+                        border: errors?.lastName?.message && '2px solid var(--red)',
+                        backgroundImage: errors?.lastName?.message && 'url(assets/error.png)'
+                    }}
+                    type={'text'}
+                    placeholder="Last Name"
+                    {...register('lastName')}
+                />
+                <Error>{errors.lastName?.message}</Error>
+                <Input
+                    style={{
+                        border: errors?.email?.message && '2px solid var(--red)',
+                        backgroundImage: errors?.email?.message && 'url(assets/error.png)'
+                    }}
+                    type="email"
+                    placeholder='Email'
+                    {...register('email')}
+                />
+                <Error>{errors?.email?.message}</Error>
+                <Input
+                    style={{
+                        border: errors?.password?.message && '2px solid var(--red)',
+                        backgroundImage: errors?.password?.message && 'url(assets/error.png)'
+                    }}
+                    type="password"
+                    placeholder='Password'
+                    {...register('password')}
+                />
+                <Error>{errors?.password?.message}</Error>
+                <Submit type="submit" value='CLAIM YOUR FREE TRIAL' />
+                <Terms>By clicking the button, you are agreeing to our <span style={{ color: 'var(--red)', fontWeight: '700' }}>Terms and Services</span></Terms>
+            </FormDiv> :
+                <Thank>Thank you</Thank>}
+            <Test show={show} />
+        </>
     )
 }
 
@@ -121,4 +141,8 @@ const Terms = styled.h3`
     color: var(--gray);
     font-size: 11px;
     text-align: center;
+`
+const Thank = styled.h1`
+    text-align: center;
+    color: var(--white);
 `

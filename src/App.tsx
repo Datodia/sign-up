@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Form } from './components/Form'
+import Test from './components/Test'
 import { Texts } from './components/Texts'
 
 export default function App() {
