@@ -9,7 +9,7 @@ const Test: React.FC<ShowProp> = ({ show }) => {
 
   return (
     <div>
-      {show && <Confetti width={window.innerWidth} height={window.innerHeight} />}
+      {show && <Confetti width={window.innerWidth - 30} height={window.innerHeight - 30} />}
     </div>
   );
 };

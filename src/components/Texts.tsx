@@ -6,9 +6,6 @@ export const Texts = () => {
         <Container>
             <Title>Learn to code by watching others</Title>
             <Desc>See how experienced developers solve problems in real-time. Watching scripted tutorials is great, but understanding how developers think is invaluable. </Desc>
-            <Button>
-                <BtnTxt><span style={{ fontWeight: '700' }}>Try it free 7 days</span> then $20/mo. thereafter</BtnTxt>
-            </Button>
         </Container>
     )
 }
@@ -22,12 +19,19 @@ const Title = styled.h1`
     font-size: 28px;
     color: white;
     text-align: center;
+    @media screen and (min-width: 900px){
+        font-size: 50px;
+        text-align: left;
+    }
 `
 const Desc = styled.h3`
     margin-top: 20px;
     font-size: 16px;
     color: white;
     text-align: center;
+    @media screen and (min-width: 900px){
+        text-align: left;
+    }
 `
 const BtnTxt = styled(Desc)`
     margin: 0;

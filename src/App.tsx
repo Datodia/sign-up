@@ -18,6 +18,14 @@ const Container = styled.div`
   height: 100vh;
   margin: 0 auto;
   margin-bottom: 300px;
+
+  @media screen and (min-width: 900px) {
+    display: flex;
+    width: 80%;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 100px;
+  }
 `
 
 

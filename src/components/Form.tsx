@@ -49,55 +49,68 @@ export const Form = () => {
 
     return (
         <>
-            {!showThank ? <FormDiv onSubmit={handleSubmit(onSubmit)} >
-                <Input
-                    style={{
-                        border: errors?.firstName?.message && '2px solid var(--red)',
-                        backgroundImage: errors?.firstName?.message && 'url(assets/error.png)'
-                    }}
-                    type={'text'}
-                    placeholder="First Name"
-                    {...register("firstName")}
-                />
-                <Error>{errors?.firstName?.message}</Error>
-                <Input
-                    style={{
-                        border: errors?.lastName?.message && '2px solid var(--red)',
-                        backgroundImage: errors?.lastName?.message && 'url(assets/error.png)'
-                    }}
-                    type={'text'}
-                    placeholder="Last Name"
-                    {...register('lastName')}
-                />
-                <Error>{errors.lastName?.message}</Error>
-                <Input
-                    style={{
-                        border: errors?.email?.message && '2px solid var(--red)',
-                        backgroundImage: errors?.email?.message && 'url(assets/error.png)'
-                    }}
-                    type="email"
-                    placeholder='Email'
-                    {...register('email')}
-                />
-                <Error>{errors?.email?.message}</Error>
-                <Input
-                    style={{
-                        border: errors?.password?.message && '2px solid var(--red)',
-                        backgroundImage: errors?.password?.message && 'url(assets/error.png)'
-                    }}
-                    type="password"
-                    placeholder='Password'
-                    {...register('password')}
-                />
-                <Error>{errors?.password?.message}</Error>
-                <Submit type="submit" value='CLAIM YOUR FREE TRIAL' />
-                <Terms>By clicking the button, you are agreeing to our <span style={{ color: 'var(--red)', fontWeight: '700' }}>Terms and Services</span></Terms>
-            </FormDiv> :
+
+            {!showThank ?
+                <Container>
+                    <Button>
+                        <BtnTxt><span style={{ fontWeight: '700' }}>Try it free 7 days</span> then $20/mo. thereafter</BtnTxt>
+                    </Button>
+
+                    <FormDiv onSubmit={handleSubmit(onSubmit)} >
+
+                        <Input
+                            style={{
+                                border: errors?.firstName?.message && '2px solid var(--red)',
+                                backgroundImage: errors?.firstName?.message && 'url(assets/error.png)'
+                            }}
+                            type={'text'}
+                            placeholder="First Name"
+                            {...register("firstName")}
+                        />
+                        <Error>{errors?.firstName?.message}</Error>
+                        <Input
+                            style={{
+                                border: errors?.lastName?.message && '2px solid var(--red)',
+                                backgroundImage: errors?.lastName?.message && 'url(assets/error.png)'
+                            }}
+                            type={'text'}
+                            placeholder="Last Name"
+                            {...register('lastName')}
+                        />
+                        <Error>{errors.lastName?.message}</Error>
+                        <Input
+                            style={{
+                                border: errors?.email?.message && '2px solid var(--red)',
+                                backgroundImage: errors?.email?.message && 'url(assets/error.png)'
+                            }}
+                            type="email"
+                            placeholder='Email'
+                            {...register('email')}
+                        />
+                        <Error>{errors?.email?.message}</Error>
+                        <Input
+                            style={{
+                                border: errors?.password?.message && '2px solid var(--red)',
+                                backgroundImage: errors?.password?.message && 'url(assets/error.png)'
+                            }}
+                            type="password"
+                            placeholder='Password'
+                            {...register('password')}
+                        />
+                        <Error>{errors?.password?.message}</Error>
+                        <Submit type="submit" value='CLAIM YOUR FREE TRIAL' />
+                        <Terms>By clicking the button, you are agreeing to our <span style={{ color: 'var(--red)', fontWeight: '700' }}>Terms and Services</span></Terms>
+                    </FormDiv>
+                </Container> :
                 <Thank>Thank you</Thank>}
             <Test show={show} />
         </>
     )
 }
+
+const Container = styled.div`
+    width: 100%;
+`
 
 const FormDiv = styled.form`
     width: 100%;
@@ -111,6 +124,34 @@ const FormDiv = styled.form`
     background-color: var(--white);
     box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.14688);
     border-radius: 10px; 
+
+    @media screen and (min-width: 900px){
+        height: 550px;
+        margin: 0;
+    }
+`
+
+const BtnTxt = styled.h3`
+    margin: 0;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+`
+
+const Button = styled.div`
+    margin-top: 30px;
+    padding:  0 52px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 88px;
+    background-color: var(--violet);
+    box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.14688);
+    border-radius: 10px;
+    @media screen and (min-width: 900px){
+        margin-bottom: 24px;
+        justify-content: center;
+    }
 `
 
 const Input = styled.input`
@@ -133,6 +174,9 @@ const Error = styled.h3`
     font-size: 11px;
     color: var(--red);
     padding:10px 0 0 100px;
+    @media screen and (min-width: 900px){
+        padding: 10px 0 0 270px;
+    }
 `
 
 const Terms = styled.h3`
@@ -145,4 +189,5 @@ const Terms = styled.h3`
 const Thank = styled.h1`
     text-align: center;
     color: var(--white);
+    width: 100%;
 `
